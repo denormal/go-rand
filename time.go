@@ -4,6 +4,8 @@ import (
 	"time"
 )
 
+// Time returns a random time, or an error if it is not possible to read
+// sufficient random bits.
 func Time() (time.Time, error) {
 	var (
 		_err    error
@@ -21,11 +23,9 @@ func Time() (time.Time, error) {
 	return time.Time{}, _err
 }
 
+// Time returns a random duration, or an error if it is not possible to read
+// sufficient random bits.
 func Duration() (time.Duration, error) {
 	_i, _err := Int64()
-	if _err == nil {
-		return time.Duration(_i), nil
-	} else {
-		return time.Duration(0), _err
-	}
+	return time.Duration(_i), _err
 }

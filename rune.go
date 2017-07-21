@@ -12,10 +12,15 @@ var (
 	}
 )
 
+// Runes returns a random slice of length runes, or an error if sufficient
+// random bits are not available. The rune slice is taken from a pool of slices.
 func Runes(length int) ([]rune, error) {
 	return RunesIf(length, nil)
 }
 
+// RunesIf returns a random slice of length runes, comprising only those runes
+// for which isrune returns true. An error is returned if sufficient
+// random bits are not available. The rune slice is taken from a pool of slices.
 func RunesIf(length int, isrune func(rune) bool) ([]rune, error) {
 	if length <= 0 {
 		return []rune{}, nil
@@ -29,10 +34,10 @@ func RunesIf(length int, isrune func(rune) bool) ([]rune, error) {
 	for {
 		_rand, _err := Bytes(length)
 		if _err != nil {
-			Return(_runes)
+			ReturnRunes(_runes)
 			return nil, _err
 		}
-		defer Put(_rand)
+		defer ReturnBytes(_rand)
 
 		_bytes := _rand
 		for len(_bytes) != 0 {
@@ -51,8 +56,11 @@ func RunesIf(length int, isrune func(rune) bool) ([]rune, error) {
 	}
 }
 
-func RunesFrom(length int, runes []rune) ([]rune, error) {
-	if length == 0 {
+// RunesFrom returns a random slice of length runes, comprising only those runes
+// listed in the alphabet slice. An error is returned if sufficient random bits
+// are not available. The rune slice is taken from a pool of slices.
+func RunesFrom(length int, alphabet []rune) ([]rune, error) {
+	if length <= 0 {
 		return []rune{}, nil
 	}
 
@@ -60,22 +68,25 @@ func RunesFrom(length int, runes []rune) ([]rune, error) {
 	if cap(_runes) < length {
 		_runes = make([]rune, 0, length)
 	}
+	_runes = _runes[:length]
 
-	_alphabet := len(runes)
+	_alphabet := len(alphabet)
 	for _i := 0; _i < length; _i++ {
-		_index, _err := Int()
+		_index, _err := Positive()
 		if _err != nil {
-			Return(_runes)
+			ReturnRunes(_runes)
 			return nil, _err
 		}
 
-		_runes[_i] = runes[_index%_alphabet]
+		_runes[_i] = alphabet[_index%_alphabet]
 	}
 
 	return _runes, nil
 }
 
-func Return(runes []rune) {
+// ReturnRunes returns a rune slice to the pool of slices that may be returned
+// by Runes(), RunesIf() or RunesFrom().
+func ReturnRunes(runes []rune) {
 	if cap(runes) != 0 {
 		rpool.Put(runes[:0])
 	}
