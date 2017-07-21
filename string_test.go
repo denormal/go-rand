@@ -36,22 +36,25 @@ func TestString(t *testing.T) {
 		}
 
 		// ensure some runes are non-zero
-		var _s string
-		for _, _r := range []rune(_string) {
-			if _r != rune(0) {
-				goto DONE
+		//		- only do this if we have sufficient length
+		if len(_string) > 1 {
+			var _s string
+			for _, _r := range []rune(_string) {
+				if _r != rune(0) {
+					goto DONE
+				}
 			}
-		}
-		_s = "s"
-		if len([]rune(_string)) == 1 {
-			_s = ""
-		}
-		t.Errorf(
-			"Expected non-zero random string; %d zero rune%s found",
-			len([]rune(_string)), _s,
-		)
+			_s = "s"
+			if len([]rune(_string)) == 1 {
+				_s = ""
+			}
+			t.Errorf(
+				"Expected non-zero random string; %d zero rune%s found",
+				len([]rune(_string)), _s,
+			)
 
-	DONE:
+		DONE:
+		}
 	}
 }
 
