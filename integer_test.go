@@ -28,24 +28,24 @@ func TestInt64(t *testing.T) {
 	numeric(t, "Int64", func() (interface{}, error) { return rand.Int64() })
 }
 
-func TestUint(t *testing.T) {
-	numeric(t, "Uint", func() (interface{}, error) { return rand.Uint() })
+func TestUInt(t *testing.T) {
+	numeric(t, "UInt", func() (interface{}, error) { return rand.UInt() })
 }
 
-func TestUint8(t *testing.T) {
-	numeric(t, "Uint8", func() (interface{}, error) { return rand.Uint8() })
+func TestUInt8(t *testing.T) {
+	numeric(t, "UInt8", func() (interface{}, error) { return rand.UInt8() })
 }
 
-func TestUint16(t *testing.T) {
-	numeric(t, "Uint16", func() (interface{}, error) { return rand.Uint16() })
+func TestUInt16(t *testing.T) {
+	numeric(t, "UInt16", func() (interface{}, error) { return rand.UInt16() })
 }
 
-func TestUint32(t *testing.T) {
-	numeric(t, "Uint32", func() (interface{}, error) { return rand.Uint32() })
+func TestUInt32(t *testing.T) {
+	numeric(t, "UInt32", func() (interface{}, error) { return rand.UInt32() })
 }
 
-func TestUint64(t *testing.T) {
-	numeric(t, "Uint64", func() (interface{}, error) { return rand.Uint64() })
+func TestUInt64(t *testing.T) {
+	numeric(t, "UInt64", func() (interface{}, error) { return rand.UInt64() })
 }
 
 func TestPositive(t *testing.T) {
