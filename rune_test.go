@@ -17,7 +17,7 @@ func TestRunes(t *testing.T) {
 			t.Fatalf("Unexpected error from rand.Runes(): %s", _err)
 		} else if len(_runes) < _length {
 			t.Fatalf(
-				"Expected string of at least length %d, got %s",
+				"Expected string of at least length %d, got %d",
 				_length, len(_runes),
 			)
 		}
@@ -30,7 +30,7 @@ func TestRunes(t *testing.T) {
 			}
 
 			t.Fatalf(
-				"Expected string of %d rune%s, got %s",
+				"Expected string of %d rune%s, got %d",
 				_length, _s, len(_runes),
 			)
 		}
@@ -86,7 +86,7 @@ func TestRunesIf(t *testing.T) {
 			t.Fatalf("Unexpected error from rand.RunesIf(): %s", _err)
 		} else if len(_runes) < _length {
 			t.Fatalf(
-				"Expected string of at least length %d, got %s",
+				"Expected string of at least length %d, got %d",
 				_length, len(_runes),
 			)
 		}
@@ -99,7 +99,7 @@ func TestRunesIf(t *testing.T) {
 			}
 
 			t.Fatalf(
-				"Expected string of %d rune%s, got %s",
+				"Expected string of %d rune%s, got %d",
 				_length, _s, len(_runes),
 			)
 		}
@@ -144,7 +144,7 @@ func TestRunesFrom(t *testing.T) {
 			t.Fatalf("Unexpected error from rand.RunesFrom(): %s", _err)
 		} else if len(_runes) < _length {
 			t.Fatalf(
-				"Expected string of at least length %d, got %s",
+				"Expected string of at least length %d, got %d",
 				_length, len(_runes),
 			)
 		}
@@ -157,7 +157,7 @@ func TestRunesFrom(t *testing.T) {
 			}
 
 			t.Fatalf(
-				"Expected string of %d rune%s, got %s",
+				"Expected string of %d rune%s, got %d",
 				_length, _s, len(_runes),
 			)
 		}
